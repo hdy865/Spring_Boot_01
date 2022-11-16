@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace = "~{/layout/layout1 :: setContent(~{this::content})}">
+<!-- /layout/layout1의 조각을 가져온다. this::content는 현재 페이지의 content 받는다 -->
+	<th:block th:fragment = "content">
+		<h1>exTemplate Page</h1>
+	</th:block>
+</th:block>
