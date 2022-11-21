@@ -1,0 +1,102 @@
+//querydsl
+buildscript {
+
+ dependencies {
+
+ classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.10")
+
+ }
+
+}
+//querydslEnd
+
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	//querydsl
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
+	//querydslEnd
+}
+
+//querydsl
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+//querydslEnd
+
+group = 'org.zerock'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.1.0'
+	
+	//querydsl
+	implementation 'com.querydsl:querydsl-jpa'
+	implementation 'com.querydsl:querydsl-apt'
+	//querydslEnd
+	
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+//querydsl
+def querydslDir = 'src/main/generated'
+
+querydsl {
+
+ library = "com.querydsl:querydsl-apt"
+
+ jpa = true
+
+ querydslSourcesDir = querydslDir
+
+}
+
+sourceSets {
+
+ main {
+
+ java {
+
+ srcDirs = ['src/main/java', querydslDir]
+
+ }
+
+ }
+
+}
+
+compileQuerydsl {
+
+ options.annotationProcessorPath = configurations.querydsl
+
+}
+
+configurations {
+
+ querydsl.extendsFrom compileClasspath
+
+}
+//querydslEnd
