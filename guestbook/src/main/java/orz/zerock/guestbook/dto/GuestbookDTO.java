@@ -2,6 +2,7 @@ package orz.zerock.guestbook.dto;
 
 import java.time.LocalDateTime;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,9 +15,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class GuestbookDTO {
 
-	private Long gno;
+	//private Long gno;
 	private String title;
 	private String content;
 	private String writer;
-	private LocalDateTime regDate, modDate;
+	//private LocalDateTime regDate, modDate;
 }
