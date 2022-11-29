@@ -23,6 +23,7 @@ public class GuestbookServiceImpl implements GuestbookService {
 		
 		Guestbook entity = dtoToEntity(dto);
 		log.info(entity);
+		
 		repository.save(entity);
 		
 		return entity.getGno();

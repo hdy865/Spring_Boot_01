@@ -12,11 +12,10 @@ public class GuestbookServiceTests {
 
 	@Autowired
 	private GuestbookService service;
-	//long gno = 301;
+	
 	@Test
 	public void testRegister() {
 		GuestbookDTO guestbookDTO = GuestbookDTO.builder()
-				/*.gno(gno)*/
 				.title("Sample Title")
 				.content("Sample Content")
 				.writer("user0")

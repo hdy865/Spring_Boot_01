@@ -14,7 +14,7 @@ public interface GuestbookService {
 				.content(dto.getContent())
 				.writer(dto.getWriter())
 				.build();
-		
+	
 		return entity;
 	}
 }
