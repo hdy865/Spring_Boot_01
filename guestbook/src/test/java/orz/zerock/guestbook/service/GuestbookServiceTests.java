@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import orz.zerock.guestbook.dto.GuestbookDTO;
+import orz.zerock.guestbook.dto.PageRequestDTO;
+import orz.zerock.guestbook.dto.PageResultDTO;
+import orz.zerock.guestbook.entity.Guestbook;
 
 @SpringBootTest
 public class GuestbookServiceTests {
@@ -13,7 +16,7 @@ public class GuestbookServiceTests {
 	@Autowired
 	private GuestbookService service;
 	
-	@Test
+	//@Test
 	public void testRegister() {
 		GuestbookDTO guestbookDTO = GuestbookDTO.builder()
 				.title("Sample Title")
@@ -22,6 +25,16 @@ public class GuestbookServiceTests {
 				.build();
 		
 		System.out.println(service.register(guestbookDTO));
+	}
+	@Test
+	public void testList() {
+		PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
+		
+		PageResultDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(pageRequestDTO);
+		
+		for (GuestbookDTO guestbookDTO : resultDTO.getDtoList()) {
+			System.out.println(guestbookDTO);
+		}
 	}
 }
 
