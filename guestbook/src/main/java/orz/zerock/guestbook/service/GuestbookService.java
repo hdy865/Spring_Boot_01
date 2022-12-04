@@ -12,7 +12,7 @@ public interface GuestbookService {
 	default Guestbook dtoToEntity(GuestbookDTO dto) {
 		
 		Guestbook entity = Guestbook.builder()
-				//.gno(dto.getGno())
+				.gno(dto.getGno())
 				.title(dto.getTitle())
 				.content(dto.getContent())
 				.writer(dto.getWriter())
@@ -23,12 +23,12 @@ public interface GuestbookService {
 	
 	default GuestbookDTO entityToDTO(Guestbook entity) {
 		GuestbookDTO dto = GuestbookDTO.builder()
-		//.gno(entity.getGno())
+		.gno(entity.getGno())
 		.title(entity.getTitle())
 		.content(entity.getContent())
 		.writer(entity.getWriter())
-		//.regDate(entity.getRegDate())
-		//.modDate(entity.getModDate())
+		.regDate(entity.getRegDate())
+		.modDate(entity.getModDate())
 		.build();
 		return dto;
 	}
