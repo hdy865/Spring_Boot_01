@@ -20,6 +20,8 @@ public class PageRequestDTO {
 	//정렬은 나중에 다양한 상황에서 쓰기 위해 별도의 파라미터로 받도록 설계
 	private int page;
 	private int size;
+	private String type;
+	private String keyword;
 	
 	public PageRequestDTO() {
 		this.page = 1;

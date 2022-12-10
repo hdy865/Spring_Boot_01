@@ -43,16 +43,22 @@ public class PageResultDTO<DTO, EN> {
 	}
 
 	private void makePageList(Pageable pageable) {
-		this.page = pageable.getPageNumber() + 1;
+		this.page = pageable.getPageNumber() + 1;//0부터 시작하니까?
 		this.size = pageable.getPageSize();
 		
-		//temp and page
+		//끝번호 - 1페이지 Math.ceil(1/10.0) * 10, tempEnd = 10
+		//2페이지 Math.ceil(2/10.0) * 10, tempEnd = 10
+		//11페이지 Math.ceil(11/10.0) *10, tempEnd = 20
 		int tempEnd = (int)(Math.ceil(page/10.0)) * 10;
 		
 		start = tempEnd - 9;
 		prev = start > 1;
-		end = totalPage > tempEnd ? tempEnd : totalPage;
 		next = totalPage > tempEnd;
+		
+		//총 페이지가 끝 페이지 보다 크면 end = tempEnd
+		//총 페이지가 끝 페이지 보다 작으면 end = totalPage
+		end = totalPage > tempEnd ? tempEnd : totalPage;
+		
 		
 		pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
 	}
