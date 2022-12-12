@@ -1,4 +1,4 @@
-package org.zerock.board;
+package org.zerock.board.repository;
 
 import java.util.stream.IntStream;
 
