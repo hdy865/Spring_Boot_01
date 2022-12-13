@@ -29,7 +29,7 @@ public class PageRequestDTO {
 	}
 	
 	
-	
+	//PageRequest의 of 메소드
 	public Pageable getPageable(Sort sort) {
 		return PageRequest.of(page - 1, size, sort);
 	}

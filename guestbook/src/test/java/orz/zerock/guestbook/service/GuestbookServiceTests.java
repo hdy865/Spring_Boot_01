@@ -27,7 +27,7 @@ public class GuestbookServiceTests {
 		
 		System.out.println(service.register(guestbookDTO));
 	}
-	//@Test
+	@Test
 	public void testList() {
 		PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
 		
@@ -46,7 +46,7 @@ public class GuestbookServiceTests {
 		resultDTO.getPageList().forEach(i -> System.out.println(i));
 	}
 	
-	@Test
+	//@Test
 	public void testSearch() {
 		PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
 				.page(1)

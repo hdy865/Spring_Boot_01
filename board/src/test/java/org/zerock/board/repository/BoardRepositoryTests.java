@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
+import javax.transaction.Transactional;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -95,5 +98,21 @@ public class BoardRepositoryTests {
 		Object[] arr = (Object[])result;
 		
 		System.out.println(Arrays.toString(arr));
+	}
+	
+	
+	//@Test
+	public void testSearch1() {
+		
+		boardRepository.search1();
+	}
+	
+	@Test
+	public void testSearchPage() {
+		
+		Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending()
+				.and(Sort.by("title").ascending()));
+		
+		Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
 	}
 }

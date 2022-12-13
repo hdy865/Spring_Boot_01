@@ -34,7 +34,7 @@ public class PageResultDTO<DTO, EN> {
 	
 	private List<Integer> pageList;
 	
-	//페이지 번호 목록
+	//페이지 번호 목록 
 	public PageResultDTO(Page<EN> result, Function<EN, DTO> fn) {
 		dtoList = result.stream().map(fn).collect(Collectors.toList());
 		

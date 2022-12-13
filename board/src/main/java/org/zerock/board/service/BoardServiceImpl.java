@@ -43,11 +43,18 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO) {
 		
-		log.info(pageRequestDTO);
+		log.info(">>>pageRequestDTO : " + pageRequestDTO);
 		
+		//엔티티 객체들을 DTO리스트로 변환
 		Function<Object[], BoardDTO> fn = (en -> entityToDTO((Board)en[0],(Member)en[1],(Long)en[2]));
 		
-		Page<Object[]> result = repository.getBoardWithReplyCount(pageRequestDTO.getPageable(Sort.by("bno").descending()));
+		//화면 페이지 전환에 필요한 값 생성
+		//Page<Object[]> result = repository.getBoardWithReplyCount(pageRequestDTO.getPageable(Sort.by("bno").descending()));
+		
+		Page<Object[]> result = repository.searchPage(
+				pageRequestDTO.getType(), 
+				pageRequestDTO.getKeyword(), 
+				pageRequestDTO.getPageable(Sort.by("bno").descending()));
 		
 		return new PageResultDTO<>(result, fn);
 	}
